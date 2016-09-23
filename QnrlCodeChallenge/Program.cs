@@ -49,9 +49,8 @@ namespace QnrlCodeChallenge
         // public IList<Card> Shuffle(IList<Card> input)
         public void Shuffle()
         {
-            var unshuffled = new List<Card>();
             var shuffled = new List<Card>();
-            unshuffled = Cards.ToList();
+            var unshuffled = Cards.ToList();
 
             int count = unshuffled.Count;
             var rnd = new Random();
