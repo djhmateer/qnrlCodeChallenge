@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
+// asdf
 namespace QnrlCodeChallenge
 {
     class Program
