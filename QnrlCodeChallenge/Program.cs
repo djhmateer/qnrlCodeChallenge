@@ -34,10 +34,10 @@ namespace QnrlCodeChallenge
             for (int i = 0; i < 4; i++)
             {
                 // Get suit based on int value of enum
-                Suit suit = (Suit)i;
+                var suit = (Suit)i;
                 for (int j = 1; j < 14; j++)
                 {
-                    Rank rank = (Rank)j;
+                    var rank = (Rank)j;
                     Cards.Add(new Card { Suit = suit, Rank = rank });
                 }
             }
@@ -71,7 +71,7 @@ namespace QnrlCodeChallenge
         }
     }
 
-    // struct ROT - small, use when immutable once created
+    // struct ROT - small, immutable once created
     struct Card
     {
         public Suit Suit { get; set; }
@@ -106,5 +106,24 @@ namespace QnrlCodeChallenge
         Jack = 11,
         Queen = 12,
         King = 13
+    }
+
+    enum WorldBuilderStatus
+    {
+        NotProcessed = 0,
+        Processed = 1,
+        Stale = 2
+    }
+
+    class Thing
+    {
+        public Thing()
+        {
+            var x = 1;
+            if (x == (int)WorldBuilderStatus.Processed)
+            {
+                // asdf
+            }
+        }
     }
 }
