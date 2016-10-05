@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using static System.Enum;
 
-// asdf
 namespace QnrlCodeChallenge
 {
     class Program
@@ -10,44 +10,96 @@ namespace QnrlCodeChallenge
         static void Main()
         {
             var deck = new Deck();
+            var hand1 = new Hand(deck);
+            var hand2 = new Hand(deck);
+
             deck.Shuffle();
 
-            foreach (var card in deck.Cards)
+            // Each hand takes it in turns to draw 5 cards from the deck.  Display the contents of the two hands.
+            for (int i = 0; i < 5; i++)
             {
-                Console.WriteLine(card);
+                hand1.Draw();
+                hand2.Draw();
             }
 
-            Console.WriteLine("total cards: " + deck.Cards.Count);
+            Console.WriteLine(hand1);
+            Console.WriteLine(hand2);
+
+            //foreach (var card in deck.Cards)
+            //    Console.WriteLine(card);
+
+            //Console.WriteLine(deck.DrawFirstCardFromDeck());
+            //Console.WriteLine(deck);
+            //Console.WriteLine("total cards: " + deck.Cards.Count);
+        }
+    }
+
+    // Hand - Class
+    // Deck - Class
+    // Card - struct
+    // Suit - enum
+    // Rank - enum
+    class Hand
+    {
+        Deck _deck;
+        public List<Card> Cards = new List<Card>();
+
+        public Hand(Deck deck)
+        {
+            _deck = deck;
+        }
+
+        public void Draw()
+        {
+            var card = _deck.DrawFirstCardFromDeck();
+            Cards.Add(card);
+        }
+
+        public override string ToString()
+        {
+            var x = "";
+            foreach (var card in Cards)
+                x += card + Environment.NewLine;
+            return x;
         }
     }
 
     class Deck
     {
         // Field (was called List in spec.. prefer Cards)
-        public IList<Card> Cards;
+        public List<Card> Cards;
         // Property
         public int NumberOfCards { get; set; }
 
         public Deck()
         {
             Cards = new List<Card>();
-            // Populate 52 cards in order
-            for (int i = 0; i < 4; i++)
+            // Populate 52 cards in order - Suit and Rank are enums
+            foreach (Suit suit in GetValues(typeof(Suit)))
             {
-                // Get suit based on int value of enum
-                var suit = (Suit)i;
-                for (int j = 1; j < 14; j++)
+                foreach (Rank rank in GetValues(typeof(Rank)))
                 {
-                    var rank = (Rank)j;
+                    // Card is a struct
                     Cards.Add(new Card { Suit = suit, Rank = rank });
                 }
             }
         }
-        
-        // can see that they want encapsulation
-        // will go down that road but next stop would be a more data structure style of OO
-        // with more testable functions eg 
-        // public IList<Card> Shuffle(IList<Card> input)
+
+        public override string ToString()
+        {
+            var x = "";
+            foreach (var card in Cards)
+                x += card + Environment.NewLine;
+            return x;
+        }
+
+        public Card DrawFirstCardFromDeck()
+        {
+            var x = Cards[0];
+            Cards.RemoveAt(0);
+            return x;
+        }
+
         public void Shuffle()
         {
             var shuffled = new List<Card>();
@@ -107,24 +159,5 @@ namespace QnrlCodeChallenge
         Jack = 11,
         Queen = 12,
         King = 13
-    }
-
-    enum WorldBuilderStatus
-    {
-        NotProcessed = 0,
-        Processed = 1,
-        Stale = 2
-    }
-
-    class Thing
-    {
-        public Thing()
-        {
-            var x = 1;
-            if (x == (int)WorldBuilderStatus.Processed)
-            {
-                // asdf
-            }
-        }
     }
 }
