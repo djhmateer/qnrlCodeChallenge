@@ -10,10 +10,10 @@ namespace QnrlCodeChallenge
         static void Main()
         {
             var deck = new Deck();
+            deck.Shuffle();
+
             var hand1 = new Hand(deck);
             var hand2 = new Hand(deck);
-
-            deck.Shuffle();
 
             // Each hand takes it in turns to draw 5 cards from the deck.  Display the contents of the two hands.
             for (int i = 0; i < 5; i++)
@@ -25,12 +25,7 @@ namespace QnrlCodeChallenge
             Console.WriteLine(hand1);
             Console.WriteLine(hand2);
 
-            //foreach (var card in deck.Cards)
-            //    Console.WriteLine(card);
-
-            //Console.WriteLine(deck.DrawFirstCardFromDeck());
-            //Console.WriteLine(deck);
-            //Console.WriteLine("total cards: " + deck.Cards.Count);
+            Console.WriteLine("total cards left in deck: " + deck.Cards.Count);
         }
     }
 
@@ -57,10 +52,7 @@ namespace QnrlCodeChallenge
 
         public override string ToString()
         {
-            var x = "";
-            foreach (var card in Cards)
-                x += card + Environment.NewLine;
-            return x;
+            return Cards.Aggregate("", (x, card) => x + (card + Environment.NewLine));
         }
     }
 
@@ -87,10 +79,7 @@ namespace QnrlCodeChallenge
 
         public override string ToString()
         {
-            var x = "";
-            foreach (var card in Cards)
-                x += card + Environment.NewLine;
-            return x;
+            return Cards.Aggregate("", (x, card) => x + (card + Environment.NewLine));
         }
 
         public Card DrawFirstCardFromDeck()
@@ -124,7 +113,6 @@ namespace QnrlCodeChallenge
         }
     }
 
-    // struct ROT - small, immutable once created
     struct Card
     {
         public Suit Suit { get; set; }
