@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using static System.Enum;
 
 namespace QnrlCodeChallenge
@@ -43,7 +44,10 @@ namespace QnrlCodeChallenge
 
     // Hand - Class
     // Deck - Class
-    // Card - struct
+
+    // CardCollection - abstract class
+    // Cards - Class
+    // Card - Class
     // Suit - enum
     // Rank - enum
     class Hand
@@ -68,12 +72,15 @@ namespace QnrlCodeChallenge
         }
     }
 
+
     class Deck
     {
         // Field (was called List in spec.. prefer Cards)
         public List<Card> Cards;
         // Property
-        public int NumberOfCards { get; set; }
+        // expression body C#6
+        // http://geekswithblogs.net/BlackRabbitCoder/archive/2015/05/14/c.net-little-wonders-expression-bodied-members-in-c-6.aspx
+        public int NumberOfCards => Cards.Count;
 
         public Deck()
         {
@@ -111,7 +118,7 @@ namespace QnrlCodeChallenge
             for (var i = 0; i < count; i++)
             {
                 // get a random card from the unshuffled list
-                var index = rnd.Next(0, unshuffled.Count-1);
+                var index = rnd.Next(0, unshuffled.Count - 1);
                 var card = unshuffled[index];
 
                 // put onto new shuffled list
@@ -123,6 +130,18 @@ namespace QnrlCodeChallenge
 
             Cards = shuffled;
         }
+    }
+
+    abstract class CardCollection
+    {
+        private List<Card> Cards;
+
+        public int Count => Cards.Count;
+    }
+
+    class Cards
+    {
+        
     }
 
     class Card : IComparable<Card>
