@@ -9,6 +9,18 @@ namespace QnrlCodeChallenge
     {
         static void Main()
         {
+            //var cards = new List<Card>();
+            //var card5 = new Card {Rank = Rank.Five};
+            //var card7 = new Card {Rank = Rank.Seven};
+            //var card9 = new Card {Rank = Rank.Nine};
+            //cards.Add(card7);
+            //cards.Add(card5);
+            //cards.Add(card9);
+            //foreach (var card in cards) Console.WriteLine(card);
+            //// Sorts in ascending order as we've implemented IComparable
+            //cards.Sort();
+            //foreach (var card in cards) Console.WriteLine(card);
+
             var deck = new Deck();
             deck.Shuffle();
 
@@ -113,14 +125,20 @@ namespace QnrlCodeChallenge
         }
     }
 
-    struct Card
+    class Card : IComparable<Card>
     {
         public Suit Suit { get; set; }
         public Rank Rank { get; set; }
 
         public override string ToString()
         {
-            return Rank + " of " + Suit;
+            return Rank == Rank.Joker ? "Joker" : Rank + " of " + Suit;
+        }
+
+        // Suit is ignored
+        public int CompareTo(Card other)
+        {
+            return Rank.CompareTo(other.Rank);
         }
     }
 
@@ -129,7 +147,8 @@ namespace QnrlCodeChallenge
         Hearts = 0,
         Diamonds = 1,
         Clubs = 2,
-        Spades = 3
+        Spades = 3,
+        Joker = 4
     }
 
     enum Rank
@@ -146,6 +165,7 @@ namespace QnrlCodeChallenge
         Ten = 10,
         Jack = 11,
         Queen = 12,
-        King = 13
+        King = 13,
+        Joker = 14
     }
 }
