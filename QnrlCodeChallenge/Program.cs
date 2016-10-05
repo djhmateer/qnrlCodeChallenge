@@ -42,15 +42,15 @@ namespace QnrlCodeChallenge
         }
     }
 
-    // Hand - Class
-    // Deck - Class
+    // Hand - Class : Cards
+    // Deck - Class : Cards
 
     // CardCollection - abstract class
-    // Cards - Class
+    // Cards - Class : CardCollection
     // Card - Class
     // Suit - enum
     // Rank - enum
-    class Hand
+    class Hand : Cards
     {
         Deck _deck;
         public List<Card> Cards = new List<Card>();
@@ -73,7 +73,7 @@ namespace QnrlCodeChallenge
     }
 
 
-    class Deck
+    class Deck : Cards
     {
         // Field (was called List in spec.. prefer Cards)
         public List<Card> Cards;
@@ -134,14 +134,17 @@ namespace QnrlCodeChallenge
 
     abstract class CardCollection
     {
-        private List<Card> Cards;
-
-        public int Count => Cards.Count;
+        public List<Card> ListOfCards;
     }
 
-    class Cards
+    class Cards : CardCollection
     {
-        
+        public int Count => ListOfCards.Count;
+
+        public Cards(List<Card> cards)
+        {
+            ListOfCards = cards;
+        }
     }
 
     class Card : IComparable<Card>
