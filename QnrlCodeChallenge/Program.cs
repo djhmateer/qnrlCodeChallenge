@@ -12,10 +12,9 @@ namespace QnrlCodeChallenge
         {
             // Create a deck with 2 jokers
             var deck = new Deck();
-            Console.WriteLine($"no cards in deck {deck.Count}");
+            Console.WriteLine($"Created deck, no cards in deck {deck.Count}");
 
             deck.Shuffle();
-            //foreach (var card in deck.ListOfCards) Console.WriteLine(card);
 
             // Deal 2 hands with 5 cards each, one after the other
             var hand1 = new Hand(deck);
@@ -28,29 +27,31 @@ namespace QnrlCodeChallenge
                 hand2.DrawFromDeck();
             }
 
-            Console.WriteLine($"no cards in deck {deck.Count}");
+            Console.WriteLine($"H1 and H2 drawn cards, no cards left in deck {deck.Count}");
 
+            DisplayHandsToConsole(hand1, hand2);
 
-            Console.WriteLine(hand1);
-            Console.WriteLine(hand2);
-
-            // Sort on the cards in the hands
+            Console.WriteLine("Sorting cards in the hands");
             hand1.ListOfCards.Sort();
             hand2.ListOfCards.Sort();
 
-            Console.WriteLine(hand1);
-            Console.WriteLine(hand2);
+            DisplayHandsToConsole(hand1, hand2);
 
-            // Make the first hand give the second hand 2 cards
+            Console.WriteLine("Make H1 give the H2, 2 cards");
             var cardToGive1 = hand1.GiveCardFromHand();
             var cardToGive2 = hand1.GiveCardFromHand();
             hand2.ReceiveCard(cardToGive1);
             hand2.ReceiveCard(cardToGive2);
 
-            Console.WriteLine(hand1);
-            Console.WriteLine(hand2);
-
+            DisplayHandsToConsole(hand1, hand2);
             Console.ReadLine();
+        }
+
+        private static void DisplayHandsToConsole(Hand hand1, Hand hand2)
+        {
+            Console.WriteLine("H1" + Environment.NewLine + hand1);
+            Console.WriteLine();
+            Console.WriteLine("H2" + Environment.NewLine + hand2);
         }
     }
 
