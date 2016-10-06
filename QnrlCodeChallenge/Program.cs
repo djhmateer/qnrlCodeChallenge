@@ -10,108 +10,89 @@ namespace QnrlCodeChallenge
     {
         static void Main()
         {
-            //var cards = new List<Card>();
-            //var card5 = new Card {Rank = Rank.Five};
-            //var card7 = new Card {Rank = Rank.Seven};
-            //var card9 = new Card {Rank = Rank.Nine};
-            //cards.Add(card7);
-            //cards.Add(card5);
-            //cards.Add(card9);
-            //foreach (var card in cards) Console.WriteLine(card);
-            //// Sorts in ascending order as we've implemented IComparable
-            //cards.Sort();
-            //foreach (var card in cards) Console.WriteLine(card);
-
+            // Create a deck with 2 jokers
             var deck = new Deck();
-            deck.Shuffle();
+            Console.WriteLine($"no cards in deck {deck.Count}");
 
+            deck.Shuffle();
+            //foreach (var card in deck.ListOfCards) Console.WriteLine(card);
+
+            // Deal 2 hands with 5 cards each, one after the other
             var hand1 = new Hand(deck);
             var hand2 = new Hand(deck);
 
-            // Each hand takes it in turns to draw 5 cards from the deck.  Display the contents of the two hands.
+            // Each hand takes it in turns to draw 5 cards from the deck. 
             for (int i = 0; i < 5; i++)
             {
-                hand1.Draw();
-                hand2.Draw();
+                hand1.DrawFromDeck();
+                hand2.DrawFromDeck();
             }
+
+            Console.WriteLine($"no cards in deck {deck.Count}");
+
 
             Console.WriteLine(hand1);
             Console.WriteLine(hand2);
 
-            Console.WriteLine("total cards left in deck: " + deck.Cards.Count);
+            // Sort on the cards in the hands
+            hand1.ListOfCards.Sort();
+            hand2.ListOfCards.Sort();
+
+            Console.WriteLine(hand1);
+            Console.WriteLine(hand2);
+
+            // Make the first hand give the second hand 2 cards
+            var cardToGive1 = hand1.GiveCardFromHand();
+            var cardToGive2 = hand1.GiveCardFromHand();
+            hand2.ReceiveCard(cardToGive1);
+            hand2.ReceiveCard(cardToGive2);
+
+            Console.WriteLine(hand1);
+            Console.WriteLine(hand2);
+
+            Console.ReadLine();
         }
     }
 
-    // Hand - Class : Cards
-    // Deck - Class : Cards
+    // Cards - Class : CardCollection abstract class (ListOfCards)
+    // Hand - Class : Cards.. Hand 'is a' Cards
+    // Deck - Class : Cards.  Deck 'is a' Cards
 
-    // CardCollection - abstract class
-    // Cards - Class : CardCollection
     // Card - Class
     // Suit - enum
     // Rank - enum
-    class Hand : Cards
+
+    abstract class CardCollection
     {
-        Deck _deck;
-        public List<Card> Cards = new List<Card>();
-
-        public Hand(Deck deck)
-        {
-            _deck = deck;
-        }
-
-        public void Draw()
-        {
-            var card = _deck.DrawFirstCardFromDeck();
-            Cards.Add(card);
-        }
-
-        public override string ToString()
-        {
-            return Cards.Aggregate("", (x, card) => x + (card + Environment.NewLine));
-        }
+        public List<Card> ListOfCards;
     }
 
-
-    class Deck : Cards
+    class Cards : CardCollection
     {
-        // Field (was called List in spec.. prefer Cards)
-        public List<Card> Cards;
-        // Property
-        // expression body C#6
-        // http://geekswithblogs.net/BlackRabbitCoder/archive/2015/05/14/c.net-little-wonders-expression-bodied-members-in-c-6.aspx
-        public int NumberOfCards => Cards.Count;
+        public int Count => ListOfCards.Count;
 
-        public Deck()
-        {
-            Cards = new List<Card>();
-            // Populate 52 cards in order - Suit and Rank are enums
-            foreach (Suit suit in GetValues(typeof(Suit)))
-            {
-                foreach (Rank rank in GetValues(typeof(Rank)))
-                {
-                    // Card is a struct
-                    Cards.Add(new Card { Suit = suit, Rank = rank });
-                }
-            }
-        }
-
-        public override string ToString()
-        {
-            return Cards.Aggregate("", (x, card) => x + (card + Environment.NewLine));
-        }
+        public void DrawCards(int num)
+        {}
 
         public Card DrawFirstCardFromDeck()
         {
-            var x = Cards[0];
-            Cards.RemoveAt(0);
+            var x = ListOfCards[0];
+            ListOfCards.RemoveAt(0);
             return x;
         }
+
+        public void AddCard(Card card)
+        {
+            ListOfCards.Add(card);
+        }
+
+        public void AddCards(List<Card> cards)
+        {}
 
         public void Shuffle()
         {
             var shuffled = new List<Card>();
-            var unshuffled = Cards.ToList();
+            var unshuffled = ListOfCards.ToList();
 
             int count = unshuffled.Count;
             var rnd = new Random();
@@ -127,23 +108,65 @@ namespace QnrlCodeChallenge
                 // delete from old unshuffled list
                 unshuffled.RemoveAt(index);
             }
-
-            Cards = shuffled;
+            ListOfCards = shuffled;
         }
     }
 
-    abstract class CardCollection
+    class Deck : Cards
     {
-        public List<Card> ListOfCards;
+        public Deck()
+        {
+            ListOfCards = new List<Card>();
+            foreach (Suit suit in GetValues(typeof(Suit)))
+            {
+                if (suit == Suit.Joker) continue;
+                foreach (Rank rank in GetValues(typeof(Rank)))
+                {
+                    if (rank == Rank.Joker) continue;
+                    AddCard(new Card { Suit = suit, Rank = rank });
+                }
+            }
+            AddCard(new Card { Suit = Suit.Joker, Rank = Rank.Joker});
+            AddCard(new Card { Suit = Suit.Joker, Rank = Rank.Joker});
+        }
+
+        public override string ToString()
+        {
+            return ListOfCards.Aggregate("", (x, card) => x + (card + Environment.NewLine));
+        }
     }
 
-    class Cards : CardCollection
+    class Hand : Cards
     {
-        public int Count => ListOfCards.Count;
+        Deck _deck;
 
-        public Cards(List<Card> cards)
+        public Hand(Deck deck)
         {
-            ListOfCards = cards;
+            _deck = deck;
+            ListOfCards = new List<Card>();
+        }
+
+        public void DrawFromDeck()
+        {
+            var card = _deck.DrawFirstCardFromDeck();
+            ListOfCards.Add(card);
+        }
+
+        public Card GiveCardFromHand()
+        {
+            var card = ListOfCards[0];
+            ListOfCards.RemoveAt(0);
+            return card;
+        }
+
+        public void ReceiveCard(Card card)
+        {
+            ListOfCards.Add(card);
+        }
+
+        public override string ToString()
+        {
+            return ListOfCards.Aggregate("", (x, card) => x + (card + Environment.NewLine));
         }
     }
 
@@ -191,3 +214,16 @@ namespace QnrlCodeChallenge
         Joker = 14
     }
 }
+
+// testing icomparable
+//var cards = new List<Card>();
+//var card5 = new Card {Rank = Rank.Five};
+//var card7 = new Card {Rank = Rank.Seven};
+//var card9 = new Card {Rank = Rank.Nine};
+//cards.Add(card7);
+//cards.Add(card5);
+//cards.Add(card9);
+//foreach (var card in cards) Console.WriteLine(card);
+//// Sorts in ascending order as we've implemented IComparable
+//cards.Sort();
+//foreach (var card in cards) Console.WriteLine(card);
