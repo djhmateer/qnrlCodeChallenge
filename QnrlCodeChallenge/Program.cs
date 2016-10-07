@@ -1,13 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using static System.Enum;
 
 namespace QnrlCodeChallenge
 {
     class Program
     {
+        // Cards - Class : CardCollection abstract class (ListOfCards)
+        // Hand - Class : Cards.. Hand 'is a' Cards
+        // Deck - Class : Cards.  Deck 'is a' Cards
+
+        // Card - Class
+        // Suit - enum
+        // Rank - enum
+
         static void Main()
         {
             // Create a deck with 2 jokers
@@ -55,14 +62,6 @@ namespace QnrlCodeChallenge
         }
     }
 
-    // Cards - Class : CardCollection abstract class (ListOfCards)
-    // Hand - Class : Cards.. Hand 'is a' Cards
-    // Deck - Class : Cards.  Deck 'is a' Cards
-
-    // Card - Class
-    // Suit - enum
-    // Rank - enum
-
     abstract class CardCollection
     {
         public List<Card> ListOfCards;
@@ -95,7 +94,7 @@ namespace QnrlCodeChallenge
             var shuffled = new List<Card>();
             var unshuffled = ListOfCards.ToList();
 
-            int count = unshuffled.Count;
+            var count = unshuffled.Count;
             var rnd = new Random();
             for (var i = 0; i < count; i++)
             {
