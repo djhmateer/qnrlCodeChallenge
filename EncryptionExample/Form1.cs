@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace EncryptionExample
 {
@@ -147,5 +149,67 @@ namespace EncryptionExample
                 ms.Close();
             }
         }
+
+        void btnEncryptRijndael_Click(object sender, EventArgs e)
+        {
+            var clearText = textBox1.Text;
+            var cypherText = Encrypt(Encoding.UTF8.GetBytes(clearText), "secret");
+            
+            // test decrypt
+            var clearText2 = Decrypt(cypherText, "secret");
+
+            // hmm need to send the encrypted message through a stream object.. ahh easier than text encodings :-)
+
+            // works on bytes
+            //var x = Encoding.UTF8.GetString(clearText2);
+            //// test encode/decode
+            //var y = Encoding.UTF8.GetString(cypherText);
+            //var z = Encoding.UTF8.GetBytes(y);
+            //var zz = Decrypt(z, "secret");
+
+            //textBox1.Text = Encoding.UTF8.GetString(cypherText);
+        }
+
+        void btnDecryptRijndael_Click(object sender, EventArgs e)
+        {
+            var cypherText = textBox2.Text;
+            var clearText = Decrypt(Encoding.UTF8.GetBytes(cypherText), "secret");
+            textBox2.Text = Encoding.UTF8.GetString(clearText);
+        }
+
+        //http://stackoverflow.com/a/6544082/26086
+        static readonly byte[] SALT = new byte[] { 0x26, 0xdc, 0xff, 0x00, 0xad, 0xed, 0x7a, 0xee, 0xc5, 0xfe, 0x07, 0xaf, 0x4d, 0x08, 0x22, 0x3c };
+
+        public static byte[] Encrypt(byte[] plain, string password)
+        {
+            MemoryStream memoryStream;
+            CryptoStream cryptoStream;
+            Rijndael rijndael = Rijndael.Create();
+            Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(password, SALT);
+            rijndael.Key = pdb.GetBytes(32);
+            rijndael.IV = pdb.GetBytes(16);
+            memoryStream = new MemoryStream();
+            cryptoStream = new CryptoStream(memoryStream, rijndael.CreateEncryptor(), CryptoStreamMode.Write);
+            cryptoStream.Write(plain, 0, plain.Length);
+            cryptoStream.Close();
+            return memoryStream.ToArray();
+        }
+
+        public static byte[] Decrypt(byte[] cipher, string password)
+        {
+            MemoryStream memoryStream;
+            CryptoStream cryptoStream;
+            Rijndael rijndael = Rijndael.Create();
+            Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(password, SALT);
+            rijndael.Key = pdb.GetBytes(32);
+            rijndael.IV = pdb.GetBytes(16);
+            memoryStream = new MemoryStream();
+            cryptoStream = new CryptoStream(memoryStream, rijndael.CreateDecryptor(), CryptoStreamMode.Write);
+            cryptoStream.Write(cipher, 0, cipher.Length);
+            cryptoStream.Close();
+            return memoryStream.ToArray();
+        }
+
+        
     }
 }

@@ -38,6 +38,8 @@
             this.btnSendFile = new System.Windows.Forms.Button();
             this.btnSendFileCaesar = new System.Windows.Forms.Button();
             this.btnReadDecyrptCaesarWrite = new System.Windows.Forms.Button();
+            this.btnEncryptRijndael = new System.Windows.Forms.Button();
+            this.btnDecryptRijndael = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnSendMessage
@@ -88,9 +90,9 @@
             // 
             this.btnEncrypt.Location = new System.Drawing.Point(25, 198);
             this.btnEncrypt.Name = "btnEncrypt";
-            this.btnEncrypt.Size = new System.Drawing.Size(91, 31);
+            this.btnEncrypt.Size = new System.Drawing.Size(113, 31);
             this.btnEncrypt.TabIndex = 5;
-            this.btnEncrypt.Text = "Encrypt";
+            this.btnEncrypt.Text = "EncryptCaesar";
             this.btnEncrypt.UseVisualStyleBackColor = true;
             this.btnEncrypt.Click += new System.EventHandler(this.btnEncrypt_Click);
             // 
@@ -98,15 +100,15 @@
             // 
             this.btnDecrypt.Location = new System.Drawing.Point(282, 198);
             this.btnDecrypt.Name = "btnDecrypt";
-            this.btnDecrypt.Size = new System.Drawing.Size(92, 31);
+            this.btnDecrypt.Size = new System.Drawing.Size(120, 31);
             this.btnDecrypt.TabIndex = 6;
-            this.btnDecrypt.Text = "Decrypt";
+            this.btnDecrypt.Text = "DecryptCaesar";
             this.btnDecrypt.UseVisualStyleBackColor = true;
             this.btnDecrypt.Click += new System.EventHandler(this.btnDecrypt_Click);
             // 
             // btnSendFile
             // 
-            this.btnSendFile.Location = new System.Drawing.Point(80, 268);
+            this.btnSendFile.Location = new System.Drawing.Point(67, 439);
             this.btnSendFile.Name = "btnSendFile";
             this.btnSendFile.Size = new System.Drawing.Size(133, 24);
             this.btnSendFile.TabIndex = 7;
@@ -116,7 +118,7 @@
             // 
             // btnSendFileCaesar
             // 
-            this.btnSendFileCaesar.Location = new System.Drawing.Point(25, 298);
+            this.btnSendFileCaesar.Location = new System.Drawing.Point(12, 469);
             this.btnSendFileCaesar.Name = "btnSendFileCaesar";
             this.btnSendFileCaesar.Size = new System.Drawing.Size(188, 24);
             this.btnSendFileCaesar.TabIndex = 8;
@@ -126,7 +128,7 @@
             // 
             // btnReadDecyrptCaesarWrite
             // 
-            this.btnReadDecyrptCaesarWrite.Location = new System.Drawing.Point(282, 291);
+            this.btnReadDecyrptCaesarWrite.Location = new System.Drawing.Point(269, 462);
             this.btnReadDecyrptCaesarWrite.Name = "btnReadDecyrptCaesarWrite";
             this.btnReadDecyrptCaesarWrite.Size = new System.Drawing.Size(185, 31);
             this.btnReadDecyrptCaesarWrite.TabIndex = 9;
@@ -134,11 +136,33 @@
             this.btnReadDecyrptCaesarWrite.UseVisualStyleBackColor = true;
             this.btnReadDecyrptCaesarWrite.Click += new System.EventHandler(this.btnReadDecyrptCaesarWrite_Click);
             // 
+            // btnEncryptRijndael
+            // 
+            this.btnEncryptRijndael.Location = new System.Drawing.Point(25, 251);
+            this.btnEncryptRijndael.Name = "btnEncryptRijndael";
+            this.btnEncryptRijndael.Size = new System.Drawing.Size(113, 31);
+            this.btnEncryptRijndael.TabIndex = 10;
+            this.btnEncryptRijndael.Text = "EncryptRijndael";
+            this.btnEncryptRijndael.UseVisualStyleBackColor = true;
+            this.btnEncryptRijndael.Click += new System.EventHandler(this.btnEncryptRijndael_Click);
+            // 
+            // btnDecryptRijndael
+            // 
+            this.btnDecryptRijndael.Location = new System.Drawing.Point(282, 251);
+            this.btnDecryptRijndael.Name = "btnDecryptRijndael";
+            this.btnDecryptRijndael.Size = new System.Drawing.Size(113, 31);
+            this.btnDecryptRijndael.TabIndex = 11;
+            this.btnDecryptRijndael.Text = "DecryptRijndael";
+            this.btnDecryptRijndael.UseVisualStyleBackColor = true;
+            this.btnDecryptRijndael.Click += new System.EventHandler(this.btnDecryptRijndael_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(529, 355);
+            this.ClientSize = new System.Drawing.Size(529, 546);
+            this.Controls.Add(this.btnDecryptRijndael);
+            this.Controls.Add(this.btnEncryptRijndael);
             this.Controls.Add(this.btnReadDecyrptCaesarWrite);
             this.Controls.Add(this.btnSendFileCaesar);
             this.Controls.Add(this.btnSendFile);
@@ -168,6 +192,8 @@
         private System.Windows.Forms.Button btnSendFile;
         private System.Windows.Forms.Button btnSendFileCaesar;
         private System.Windows.Forms.Button btnReadDecyrptCaesarWrite;
+        private System.Windows.Forms.Button btnEncryptRijndael;
+        private System.Windows.Forms.Button btnDecryptRijndael;
     }
 }
 
