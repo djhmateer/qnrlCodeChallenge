@@ -46,6 +46,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtPublicKey = new System.Windows.Forms.TextBox();
             this.txtPrivateKey = new System.Windows.Forms.TextBox();
+            this.btnSendMessageAndDB = new System.Windows.Forms.Button();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnSendMessage
@@ -110,7 +113,7 @@
             // 
             // btnSendFile
             // 
-            this.btnSendFile.Location = new System.Drawing.Point(62, 683);
+            this.btnSendFile.Location = new System.Drawing.Point(50, 617);
             this.btnSendFile.Margin = new System.Windows.Forms.Padding(2);
             this.btnSendFile.Name = "btnSendFile";
             this.btnSendFile.Size = new System.Drawing.Size(100, 20);
@@ -121,7 +124,7 @@
             // 
             // btnSendFileCaesar
             // 
-            this.btnSendFileCaesar.Location = new System.Drawing.Point(21, 707);
+            this.btnSendFileCaesar.Location = new System.Drawing.Point(9, 641);
             this.btnSendFileCaesar.Margin = new System.Windows.Forms.Padding(2);
             this.btnSendFileCaesar.Name = "btnSendFileCaesar";
             this.btnSendFileCaesar.Size = new System.Drawing.Size(141, 20);
@@ -132,7 +135,7 @@
             // 
             // btnReadDecyrptCaesarWrite
             // 
-            this.btnReadDecyrptCaesarWrite.Location = new System.Drawing.Point(214, 701);
+            this.btnReadDecyrptCaesarWrite.Location = new System.Drawing.Point(202, 635);
             this.btnReadDecyrptCaesarWrite.Margin = new System.Windows.Forms.Padding(2);
             this.btnReadDecyrptCaesarWrite.Name = "btnReadDecyrptCaesarWrite";
             this.btnReadDecyrptCaesarWrite.Size = new System.Drawing.Size(139, 25);
@@ -155,7 +158,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(31, 645);
+            this.label3.Location = new System.Drawing.Point(19, 579);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(253, 13);
             this.label3.TabIndex = 11;
@@ -229,11 +232,43 @@
             this.txtPrivateKey.Size = new System.Drawing.Size(589, 142);
             this.txtPrivateKey.TabIndex = 18;
             // 
+            // btnSendMessageAndDB
+            // 
+            this.btnSendMessageAndDB.Location = new System.Drawing.Point(9, 680);
+            this.btnSendMessageAndDB.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSendMessageAndDB.Name = "btnSendMessageAndDB";
+            this.btnSendMessageAndDB.Size = new System.Drawing.Size(267, 21);
+            this.btnSendMessageAndDB.TabIndex = 19;
+            this.btnSendMessageAndDB.Text = "SendMessageUsingStreamWriteToDBAndSelectAll";
+            this.btnSendMessageAndDB.UseVisualStyleBackColor = true;
+            this.btnSendMessageAndDB.Click += new System.EventHandler(this.btnSendMessageAndDB_Click);
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(358, 680);
+            this.textBox3.Multiline = true;
+            this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
+            this.textBox3.Size = new System.Drawing.Size(589, 142);
+            this.textBox3.TabIndex = 20;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(271, 719);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(81, 13);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "Messages table";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1070, 808);
+            this.ClientSize = new System.Drawing.Size(1070, 836);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.btnSendMessageAndDB);
             this.Controls.Add(this.txtPrivateKey);
             this.Controls.Add(this.txtPublicKey);
             this.Controls.Add(this.label6);
@@ -280,6 +315,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtPublicKey;
         private System.Windows.Forms.TextBox txtPrivateKey;
+        private System.Windows.Forms.Button btnSendMessageAndDB;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label7;
     }
 }
 

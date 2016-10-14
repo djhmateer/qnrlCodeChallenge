@@ -312,6 +312,18 @@ namespace EncryptionExample
             return plainText;
         }
 
-        
+        private void btnSendMessageAndDB_Click(object sender, EventArgs e)
+        {
+            var ms = new MemoryStream();
+            var writer = new StreamWriter(ms);
+            // Write whatever is in the textBox1 to memoryStream
+            writer.Write(textBox1.Text);
+            writer.Flush();
+            ms.Position = 0;
+
+            var sr = new StreamReader(ms);
+            // Read from memoryStream and put into textBox2
+            textBox2.Text = sr.ReadToEnd();
+        }
     }
 }
