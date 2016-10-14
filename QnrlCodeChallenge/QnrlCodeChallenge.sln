@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QnrlCodeChallenge", "QnrlCodeChallenge.csproj", "{61272145-37E4-40E1-B5C5-A7D4F1171FBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncryptionExample", "..\EncryptionExample\EncryptionExample.csproj", "{34519021-5C9F-4EEB-83BE-5002B3C473ED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncryptionExampleWinForm", "..\EncryptionExample\EncryptionExampleWinForm.csproj", "{34519021-5C9F-4EEB-83BE-5002B3C473ED}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "QnrlCodeDB", "..\QnrlCodeDB\QnrlCodeDB.sqlproj", "{F1C93461-4DC2-40CB-8BA3-BEF5BB5FB45F}"
 EndProject

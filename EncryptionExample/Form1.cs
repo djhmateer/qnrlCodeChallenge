@@ -355,6 +355,32 @@ namespace EncryptionExample
                 }
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var ms = new MemoryStream();
+            var writer = new StreamWriter(ms);
+            // Write whatever is in the textBox1 to memoryStream
+            writer.Write(textBox1.Text);
+            writer.Flush();
+            ms.Position = 0;
+
+            var sr = new StreamReader(ms);
+            // Read from memoryStream and put into textBox2
+            var plainText = sr.ReadToEnd();
+            textBox2.Text = plainText;
+
+            // Write to DB, and read back - EntityFramework
+            var db = new QnrlCodeDBEntities();
+            db.Messages.Add(new Message {MessageText = plainText, DateCreated = DateTime.Now});
+            db.SaveChanges();
+
+            txtDBData.Text = "";
+            foreach (var message in db.Messages.OrderByDescending(x => x.Id))
+            {
+                txtDBData.Text += message.Id + " " + message.MessageText + " " + message.DateCreated + Environment.NewLine;
+            }
+        }
     }
 
     class QnrlMessage
