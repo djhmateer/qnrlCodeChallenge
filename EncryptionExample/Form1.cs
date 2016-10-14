@@ -383,6 +383,7 @@ namespace EncryptionExample
         }
     }
 
+    // Used with Dapper
     class QnrlMessage
     {
         public int Id { get; set; }
