@@ -47,7 +47,7 @@
             this.txtPublicKey = new System.Windows.Forms.TextBox();
             this.txtPrivateKey = new System.Windows.Forms.TextBox();
             this.btnSendMessageAndDB = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtDBData = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -243,14 +243,15 @@
             this.btnSendMessageAndDB.UseVisualStyleBackColor = true;
             this.btnSendMessageAndDB.Click += new System.EventHandler(this.btnSendMessageAndDB_Click);
             // 
-            // textBox3
+            // txtDBData
             // 
-            this.textBox3.Location = new System.Drawing.Point(358, 680);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(589, 142);
-            this.textBox3.TabIndex = 20;
+            this.txtDBData.Location = new System.Drawing.Point(358, 680);
+            this.txtDBData.Multiline = true;
+            this.txtDBData.Name = "txtDBData";
+            this.txtDBData.ReadOnly = true;
+            this.txtDBData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtDBData.Size = new System.Drawing.Size(589, 142);
+            this.txtDBData.TabIndex = 20;
             // 
             // label7
             // 
@@ -267,7 +268,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1070, 836);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.txtDBData);
             this.Controls.Add(this.btnSendMessageAndDB);
             this.Controls.Add(this.txtPrivateKey);
             this.Controls.Add(this.txtPublicKey);
@@ -316,7 +317,7 @@
         private System.Windows.Forms.TextBox txtPublicKey;
         private System.Windows.Forms.TextBox txtPrivateKey;
         private System.Windows.Forms.Button btnSendMessageAndDB;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtDBData;
         private System.Windows.Forms.Label label7;
     }
 }

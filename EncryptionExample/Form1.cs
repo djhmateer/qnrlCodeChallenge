@@ -1,9 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using Dapper;
+
 //http://stackoverflow.com/a/1246594/26086 - naming convention.. only time I use Hungarian
 
 namespace EncryptionExample
@@ -312,6 +319,13 @@ namespace EncryptionExample
             return plainText;
         }
 
+        public static DbConnection GetOpenConnection()
+        {
+            var connection = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=QnrlCodeDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            connection.Open();
+            return connection;
+        }
+
         private void btnSendMessageAndDB_Click(object sender, EventArgs e)
         {
             var ms = new MemoryStream();
@@ -323,7 +337,30 @@ namespace EncryptionExample
 
             var sr = new StreamReader(ms);
             // Read from memoryStream and put into textBox2
-            textBox2.Text = sr.ReadToEnd();
+            var plainText = sr.ReadToEnd();
+            textBox2.Text = plainText;
+
+            // Write to DB, and read back
+            using (var db = GetOpenConnection())
+            {
+                db.Execute("INSERT INTO Message (MessageText, DateCreated) VALUES (@MessageText, @DateCreated)", new { MessageText = plainText, DateCreated = DateTime.Now });
+
+                List<QnrlMessage> messages = db.Query<QnrlMessage>("SELECT * FROM Message ORDER BY Id Desc").ToList();
+
+                txtDBData.Text = "";
+                foreach (var message in messages)
+                {
+                    txtDBData.Text += message.Id + " " + message.MessageText + " " + message.DateCreated + Environment.NewLine;
+                }
+            }
         }
+    }
+
+    class QnrlMessage
+    {
+        public int Id { get; set; }
+        public string MessageText { get; set; }
+        public DateTime DateCreated { get; set; }
+
     }
 }
