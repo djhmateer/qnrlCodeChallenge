@@ -319,6 +319,7 @@ namespace EncryptionExample
             return plainText;
         }
 
+        // Need a local database with 1 table (see QnrlCodeDB project for schema)
         public static DbConnection GetOpenConnection()
         {
             var connection = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=QnrlCodeDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
