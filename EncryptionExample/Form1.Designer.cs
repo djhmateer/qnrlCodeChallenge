@@ -40,6 +40,12 @@
             this.btnEncryptRijndael = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnGenerateKeys = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtPublicKey = new System.Windows.Forms.TextBox();
+            this.txtPrivateKey = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnSendMessage
@@ -64,7 +70,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(212, 47);
+            this.textBox2.Location = new System.Drawing.Point(286, 47);
             this.textBox2.Margin = new System.Windows.Forms.Padding(2);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
@@ -84,7 +90,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(209, 22);
+            this.label2.Location = new System.Drawing.Point(283, 22);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
@@ -104,7 +110,7 @@
             // 
             // btnSendFile
             // 
-            this.btnSendFile.Location = new System.Drawing.Point(50, 357);
+            this.btnSendFile.Location = new System.Drawing.Point(62, 683);
             this.btnSendFile.Margin = new System.Windows.Forms.Padding(2);
             this.btnSendFile.Name = "btnSendFile";
             this.btnSendFile.Size = new System.Drawing.Size(100, 20);
@@ -115,7 +121,7 @@
             // 
             // btnSendFileCaesar
             // 
-            this.btnSendFileCaesar.Location = new System.Drawing.Point(9, 381);
+            this.btnSendFileCaesar.Location = new System.Drawing.Point(21, 707);
             this.btnSendFileCaesar.Margin = new System.Windows.Forms.Padding(2);
             this.btnSendFileCaesar.Name = "btnSendFileCaesar";
             this.btnSendFileCaesar.Size = new System.Drawing.Size(141, 20);
@@ -126,7 +132,7 @@
             // 
             // btnReadDecyrptCaesarWrite
             // 
-            this.btnReadDecyrptCaesarWrite.Location = new System.Drawing.Point(202, 375);
+            this.btnReadDecyrptCaesarWrite.Location = new System.Drawing.Point(214, 701);
             this.btnReadDecyrptCaesarWrite.Margin = new System.Windows.Forms.Padding(2);
             this.btnReadDecyrptCaesarWrite.Name = "btnReadDecyrptCaesarWrite";
             this.btnReadDecyrptCaesarWrite.Size = new System.Drawing.Size(139, 25);
@@ -149,7 +155,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 319);
+            this.label3.Location = new System.Drawing.Point(31, 645);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(253, 13);
             this.label3.TabIndex = 11;
@@ -158,17 +164,82 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(219, 248);
+            this.label4.Location = new System.Drawing.Point(293, 248);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(70, 13);
+            this.label4.Size = new System.Drawing.Size(119, 13);
             this.label4.TabIndex = 12;
-            this.label4.Text = "key is \'secret\'";
+            this.label4.Text = "symmetric key is \'secret\'";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(22, 334);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(222, 65);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "PublicKeyUser2EncryptSymmetricKey then SendToUser2 then DecryptWithUser2PrivateKe" +
+    "y then DecryptWithSymmetricKey ";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.btnPublicKey_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(293, 334);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(58, 13);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "public key:";
+            // 
+            // btnGenerateKeys
+            // 
+            this.btnGenerateKeys.Location = new System.Drawing.Point(286, 296);
+            this.btnGenerateKeys.Margin = new System.Windows.Forms.Padding(2);
+            this.btnGenerateKeys.Name = "btnGenerateKeys";
+            this.btnGenerateKeys.Size = new System.Drawing.Size(200, 25);
+            this.btnGenerateKeys.TabIndex = 15;
+            this.btnGenerateKeys.Text = "GenerateUser2PublicAndPrivateKeys";
+            this.btnGenerateKeys.UseVisualStyleBackColor = true;
+            this.btnGenerateKeys.Click += new System.EventHandler(this.btnGenerateKeys_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(293, 440);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(62, 13);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "private key:";
+            // 
+            // txtPublicKey
+            // 
+            this.txtPublicKey.Location = new System.Drawing.Point(358, 332);
+            this.txtPublicKey.Multiline = true;
+            this.txtPublicKey.Name = "txtPublicKey";
+            this.txtPublicKey.ReadOnly = true;
+            this.txtPublicKey.Size = new System.Drawing.Size(583, 67);
+            this.txtPublicKey.TabIndex = 17;
+            // 
+            // txtPrivateKey
+            // 
+            this.txtPrivateKey.Location = new System.Drawing.Point(358, 440);
+            this.txtPrivateKey.Multiline = true;
+            this.txtPrivateKey.Name = "txtPrivateKey";
+            this.txtPrivateKey.ReadOnly = true;
+            this.txtPrivateKey.Size = new System.Drawing.Size(589, 142);
+            this.txtPrivateKey.TabIndex = 18;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(397, 444);
+            this.ClientSize = new System.Drawing.Size(1070, 808);
+            this.Controls.Add(this.txtPrivateKey);
+            this.Controls.Add(this.txtPublicKey);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.btnGenerateKeys);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnEncryptRijndael);
@@ -203,6 +274,12 @@
         private System.Windows.Forms.Button btnEncryptRijndael;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnGenerateKeys;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtPublicKey;
+        private System.Windows.Forms.TextBox txtPrivateKey;
     }
 }
 
